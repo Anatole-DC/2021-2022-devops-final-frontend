@@ -1,5 +1,5 @@
 # étape de build
-FROM node:lts-alpine as build-stage
+FROM node:lts-fermium as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN yarn install
@@ -7,6 +7,6 @@ COPY . .
 RUN yarn run build
 
 # étape de production
-FROM nginx:stable-alpine as production-stage
+FROM node:lts-fermium as production-stage
 COPY --from=build-stage /app/dist ./dist
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["node", "dist/main"]

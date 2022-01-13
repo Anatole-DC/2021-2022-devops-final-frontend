@@ -29,6 +29,5 @@ yarn build
 ## Configure the app
 
 ```sh
-# Replace this with the app url
-VITE_BACKEND_URL_URL=http://localhost:3000/
+VITE_BACKEND_URL_URL=https://adechauveron-devops-final.herokuapp.com/
 ```

@@ -2,7 +2,7 @@ version: 2
 jobs:
   install: &shared-config
     docker:
-      - image: circleci/node:lts-fermium
+      - image: circleci/node:lts-alpine
     working_directory: ~/repo
     steps:
       - checkout
@@ -76,4 +76,3 @@ workflows:
       - docker-build-and-push:
           requires:
             - build
-            

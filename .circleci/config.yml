@@ -30,15 +30,13 @@ jobs:
     <<: *shared-config
     steps:
       - checkout
-      - attach_workspace:
-          at: /tmp
       - run:
           name: Install netlify
           command: |
             yarn add -D netlify-cli
       - run:
           name: Deploy app
-          command: yarn netlify deploy --auth $NETLIFY_AUTH_TOKEN --dir /tmp/repo --site $NETLIFY_SITE_ID --prod
+          command: yarn netlify deploy --auth $NETLIFY_AUTH_TOKEN --dir ~/repo --site $NETLIFY_SITE_ID --prod
 
   docker-build-and-push:
     working_directory: /dockerapp

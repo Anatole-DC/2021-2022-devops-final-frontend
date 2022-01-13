@@ -1,28 +1,12 @@
-FROM node:lts-fermium as development
-
-WORKDIR /nest-server
-
+# étape de build
+FROM node:lts-alpine as build-stage
+WORKDIR /app
 COPY package*.json ./
-
-RUN yarn install --only=development
-
+RUN yarn install
 COPY . .
-
 RUN yarn run build
 
-FROM node:lts-fermium as production
-
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
-
-WORKDIR /nest-server
-
-COPY package*.json ./
-
-RUN yarn install --only=production
-
-COPY . .
-
-COPY --from=development /nest-server/dist ./dist
-
-CMD ["node", "dist/main"]
+# étape de production
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]

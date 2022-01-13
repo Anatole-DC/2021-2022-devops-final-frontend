@@ -30,6 +30,10 @@ jobs:
     <<: *shared-config
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "package.json" }}-v1
+            - dependencies-
       - run:
           name: Install netlify
           command: |

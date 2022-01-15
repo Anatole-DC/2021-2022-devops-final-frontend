@@ -10,4 +10,4 @@ RUN yarn run build
 FROM node:lts-alpine as production-stage
 COPY . .
 COPY --from=build-stage /app/dist ./dist
-CMD ["node", "dist/main"]
+CMD ["yarn", "dev"]

@@ -16,6 +16,16 @@ jobs:
             - node_modules
           key: dependencies-{{ checksum "package.json" }}-v1
 
+  unit-tests:
+    <<: *shared-config
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "package.json" }}-v1
+            - dependencies-
+      - run: yarn test:unit
+
   build:
     <<: *shared-config
     environment:
@@ -70,9 +80,12 @@ workflows:
   build-test-and-lint:
     jobs:
       - install
+      - unit-tests:
+          requires:
+            -install
       - build:
           requires:
-            - install
+            - unit-tests
       - front-netlify-deploy:
           requires:
             - build

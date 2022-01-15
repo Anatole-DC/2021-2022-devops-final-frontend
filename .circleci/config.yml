@@ -45,7 +45,7 @@ jobs:
   docker-build-and-push:
     working_directory: /dockerapp
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: docker:19.03.13-ce-git
     steps:
       - checkout
       - setup_remote_docker

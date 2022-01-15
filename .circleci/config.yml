@@ -80,7 +80,7 @@ workflows:
       - install
       - unit-tests:
           requires:
-            -install
+            - install
       - build:
           requires:
             - unit-tests

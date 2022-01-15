@@ -19,7 +19,7 @@ jobs:
   build:
     <<: *shared-config
     environment:
-      - VITE_BACKEND_URL_URL: $VITE_BACKEND_URL_URL
+      - VITE_BACKEND_URL: $VITE_BACKEND_URL_URL
     steps:
       - checkout
       - restore_cache:
@@ -76,6 +76,12 @@ workflows:
       - front-netlify-deploy:
           requires:
             - build
+          filters:
+            branches:
+              only: main
       - docker-build-and-push:
           requires:
             - build
+          filters:
+            branches:
+              only: main

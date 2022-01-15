@@ -27,7 +27,7 @@ jobs:
   build:
     <<: *shared-config
     environment:
-      - VITE_BACKEND_URL: $VITE_BACKEND_URL_URL
+      - VITE_BACKEND_URL_URL: $VITE_BACKEND_URL_URL
     steps:
       - checkout
       - restore_cache:

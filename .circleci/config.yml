@@ -21,8 +21,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys:
-            - dependencies-{{ checksum "package.json" }}-v1
+          keys: dependencies-{{ checksum "package.json" }}-v1
       - run: yarn test:unit
 
   build:
